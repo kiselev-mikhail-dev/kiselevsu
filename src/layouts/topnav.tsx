@@ -2,6 +2,7 @@ import NextLink  from 'next/link'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useRouter } from 'next/router'
 import * as texts from '../texts/navigation'
+import logo from '../assets/img/logo.png'
 
 type TopNavItem = {
   link: any,
@@ -20,16 +21,21 @@ function GetMenuItem(item: TopNavItem, key:any, route:any) {
 
 function Topnav() {
   const links = [
-    {"link": "/about", "text": texts.ABOUT, "description": texts.DESCRIPTION_ABOUT},
+	{"link":"/education", "text":texts.EDUCATION, "description":texts.DESCRIPTION_EDUCATION},
+	{"link":"/experience", "text":texts.EXPERIENCE, "description":texts.DESCRIPTION_EXPERIENCE},
     {"link": "/portfolio", "text": texts.PORTFOLIO, "description": texts.DESCRIPTION_PORTFOLIO},
     {"link": "/contact", "text": texts.CONTACT,  "description": texts.DESCRIPTION_CONTACT},
   ];
   const route = useRouter().route;
 
 
-  return <Navbar bg="light" expand="md" sticky="top">
+  return <Navbar expand="md" sticky="top">
       <Container>
-        <NextLink href="/"><Navbar.Brand  className={route == "/" ? "nav-link disabled" : "nav-link" } href="./" data-route="home" title={texts.MIKHAIL_KISELEVS_PERSONAL_SITE}>{texts.MIKHAIL_KISELEV}</Navbar.Brand></NextLink>
+        <NextLink href="/">
+			<Navbar.Brand  className={route == "/" ? "nav-link disabled" : "nav-link" } href="./" data-route="home" title={texts.MIKHAIL_KISELEVS_PERSONAL_SITE}>
+			<img src={logo.src} alt={texts.MIKHAIL_KISELEVS_PERSONAL_SITE} width="48" height="48" />
+			</Navbar.Brand>
+		</NextLink>
         <Navbar.Toggle type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </Navbar.Toggle>

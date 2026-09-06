@@ -1,200 +1,44 @@
-import React, { useState } from 'react'
-import { Card, ListGroup, Row, Col } from 'react-bootstrap'
-import Head from 'next/head'
-import jsxToString from 'react-element-to-jsx-string'
-import FilterInput from '../components/filterInput'
-import SiteLink from '../components/siteLink'
-import { Site } from '../types/simple'
-
-interface AboutItem {
-  key: number,
-  from: number,
-  to: number,
-  title: string,
-  image: Partial<string & boolean>,
-  site: Partial<Site & boolean>,
-  location: string,
-  // eslint-disable-next-line
-  description: any,
-  tags: string
-}
-
-interface EducationItem extends AboutItem {
-  faculty: Partial<string & boolean>,
-  department: Partial<string & boolean>,
-  speciality: string,
-  value: string,
-}
-
-interface WorkItem extends AboutItem {
-  company: string,
-  companyOGRN: number,
-  companyDescription:string,
-  position: string,
-  positionDescription: string,
-}
-
-function checkItem (item: Partial<WorkItem & EducationItem>, str: string) {
-  const values = Object.values(item)
-  let correct = str.length === 0
-  values.forEach((val) => {
-    if ((typeof val === 'string' || typeof val === 'number') && val.toString().toLowerCase().includes(str.toLowerCase())) {
-      correct = true
-    } else if (typeof val === 'object' && val.url?.toLowerCase().includes(str.toLowerCase())) {
-      correct = true
-    } else if (typeof val === 'object' && !val.url && jsxToString(val).toLowerCase().includes(str.toLowerCase())) {
-      correct = true
-    }
-  })
-  return correct
-}
-
-function GetSiteLink (site: Partial<boolean & Site>) {
-  if (typeof site === 'boolean') {
-    return ''
-  }
-  return <p><b>Сайт:</b> <SiteLink site={site as Site}></SiteLink></p>
-}
-
-function GetWorkItem (item: WorkItem) {
-  const ogrn = item.companyOGRN.toString()
-  return <ListGroup.Item key={item.key}>
-    <Row>
-      <Col md={3} xl={2}>
-        <Card.Title>
-          {item.title}
-        </Card.Title>
-        <Card.Subtitle>
-          <a target="_blank" rel="noreferrer" href={ogrn.length === 13 ? 'https://zachestnyibiznes.ru/company/ul/' + ogrn : 'https://zachestnyibiznes.ru/company/ip/' + ogrn}>{item.company}</a>
-        </Card.Subtitle>
-        {item.location}
-        <br />
-        {item.from.toString()}{item.from !== item.to ? ' - ' + item.to.toString() : ''}
-      </Col>
-      <Col md={9} xl={10}>
-        {item.companyDescription.length ? <p>{item.companyDescription}</p> : ''}
-        {item.site ? GetSiteLink(item.site) : ''}
-        <p><b>Позиция:</b> {item.position} {item.positionDescription.length ? <span className="text-muted">({item.positionDescription})</span> : ''}</p>
-        {item.description}
-      </Col>
-    </Row>
-  </ListGroup.Item>
-}
-function GetEducationItem (item: EducationItem) {
-  return <ListGroup.Item key={item.key}>
-    <Row>
-      <Col md={3} xl={2}>
-        <Card.Title>{item.title}</Card.Title>
-        {item.location}<br />
-        {item.from.toString()}{item.from !== item.to ? ' - ' + item.to.toString() : ''}
-      </Col>
-      <Col md={9} xl={10}>
-        {item.site ? GetSiteLink(item.site) : ''}
-        {item.faculty ? <p><b>Факультет:</b> {item.faculty}</p> : ''}
-        {item.department ? <p><b>Кафедра:</b> {item.department}</p> : ''}
-        {item.speciality ? <p><b>Специальность:</b> {item.speciality}</p> : ''}
-        {item.value ? <p><b>Образование:</b> {item.value}</p> : ''}
-        {item.description ? item.description : ''}
-      </Col>
-    </Row>
-  </ListGroup.Item>
-}
-
-function About () {
-  const [workFilter, setWorkFilter] = useState<string>('')
-  const [educationFilter, setEducationFilter] = useState<string>('')
-  const [workFilterShow, setWorkFilterShow] = useState<boolean>(false)
-  const [educationFilterShow, setEducationFilterShow] = useState<boolean>(false)
-  const changeWorkFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWorkFilter(event.target.value)
-  }
-  const changeEducationFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEducationFilter(event.target.value)
-  }
-  const clickShowWorkFilter = () => {
-    if (workFilterShow) {
-      setWorkFilter('')
-    }
-    setWorkFilterShow(!workFilterShow)
-  }
-  const clickShowEducationFilter = () => {
-    if (educationFilterShow) {
-      setEducationFilter('')
-    }
-    setEducationFilterShow(!educationFilterShow)
-  }
-  const education = [
-    {
-      key: 4,
-      from: 2011,
-      to: 2014,
-      title: 'Институт Международного Права и Экономики им. А.С.Грибоедова (ульяновский филиал)',
+export   const work = [
+{
+      key: 14,
+      from: 2026,
+      to: 'н.в.',
+      title: 'Selecty',
       image: false,
       site: {
-        url: 'http://iile.ru',
-        exists: true
-      },
-      location: 'Ульяновск',
-      faculty: 'экономический',
-      department: 'менеджмента и управления персоналом',
-      speciality: 'Менеджмент организации',
-      value: 'высшее (бакалавр)',
-      description: 'Ускоренное отделение, т.к. уже было высшее образование.',
-      tags: 'ИМПЭ'
+		  url:'https://selecty.ru/',
+		  exists:true
+	  },
+      company: 'ООО Хинт',
+      companyOGRN: 1197746754160,
+      companyDescription: '',
+      location: 'Москва (удаленно)',
+      position: 'Главный разработчик',
+      positionDescription: 'Frontend',
+      description: 'Работа над внутренними проектами Сбера (АП Центра управления наличным денежным обращением, планировщик). React, redux, redux-thunk, axios, typescript, ant-design. Обязательно использование AI-агентов (Gigacode).',
+      tags: 'Сбер сбербанк',
+	  portfolio:[]
     },
-    {
-      key: 3,
-      from: 2008,
-      to: 2011,
-      title: 'Ульяновский Государственный Университет',
+	{
+      key: 13,
+      from: 2022,
+      to: 2026,
+      title: 'SensemakingLab',
       image: false,
       site: {
-        url: 'http://ulsu.ru',
-        exists: true
-      },
-      location: 'Ульяновск',
-      faculty: 'математики и информационных технологий (ФМиИТ)',
-      department: 'информационных технологий',
-      speciality: 'Прикладная информатика',
-      value: 'высшее (специалист)',
-      description: 'Ускоренное отделение, т.к. было профильное среднее специальное образование.',
-      tags: 'УлГу'
+		url:'https://sensemakinglab.com/',
+		exists:true
+	  },
+      company: 'ООО Лаборатория Сенсмейкинг',
+      companyOGRN: 1147746645970,
+      companyDescription: '',
+      location: 'Москва (удаленно)',
+      position: 'Главный разработчик',
+      positionDescription: 'Frontend',
+      description: 'Работа над внутренними проектами Сбера (АП Центра управления наличным денежным обращением, планировщик). React, redux, redux-thunk, axios, typescript, ant-design. Qlik Sense extensions для ВПО ЦУНДО.',
+      tags: 'Сбер сбербанк',
+	  portfolio:[]
     },
-    {
-      key: 2,
-      from: 2006,
-      to: 2008,
-      title: 'Высший колледж УлГУ «Засвияжье»',
-      image: false,
-      site: {
-        url: 'http://vkzas.ulsu.ru',
-        exists: false
-      },
-      location: 'Ульяновск',
-      faculty: false,
-      department: false,
-      speciality: 'Программное обеспечение вычислительной техники и автоматизированных систем',
-      value: 'среднее специальное (техник)',
-      description: 'Программа предусматривала три года обучения, но занятия по первому курсу мы прошли параллельно обучению в школе.',
-      tags: 'ВК Засвияжье'
-    },
-    {
-      key: 1,
-      from: 1996,
-      to: 2006,
-      title: 'Средняя школа №52',
-      image: false,
-      site: false,
-      location: 'Ульяновск',
-      faculty: false,
-      department: false,
-      speciality: 'Программное обеспечение вычислительной техники и автоматизированных систем',
-      value: 'среднее',
-      description: 'Колледжный класс, т.е. в 10-11 класах проводились дополнительные занятия по специальности «Программное обеспечение ВТ и АС», что засчитывалось за один курс коллежда.',
-      tags: 'МОУ СОШ средняя общеобразовательная школа'
-    }
-  ]
-  const work = [
     {
       key: 12,
       from: 2021,
@@ -209,7 +53,8 @@ function About () {
       position: 'Индивидуальный предприниматель',
       positionDescription: 'Frontend',
       description: 'Разработка интерактивных заданий для проекта Дети и наука (по окружающему миру на собственном фреймворке и по астрономии на новом, основанном на vue.js). Данные интерактивы использовались и используются на нескольких образовательных платформах, в том числе в Яндекс.Учебнике. Работы по поддержанию ИТ-инфраструктуры.',
-      tags: 'ДиН Childrenscience okrmir okrumir'
+      tags: 'ДиН Childrenscience okrmir okrumir',
+	  portfolio:[]
     },
     {
       key: 11,
@@ -219,7 +64,7 @@ function About () {
       image: false,
       site: {
         url: 'https://azdoc.online/',
-        exists: true
+        exists: false
       },
       company: 'ООО Симбирит',
       companyOGRN: 1077325005009,
@@ -228,7 +73,8 @@ function About () {
       position: 'По договору ГПХ',
       positionDescription: 'frontend',
       description: 'Добавление фич в панель управления Headless CMS. Используется React-admin.',
-      tags: 'Симбирские информационные технологии'
+      tags: 'Симбирские информационные технологии',
+	  portfolio:[]
     },
     {
       key: 10,
@@ -238,7 +84,7 @@ function About () {
       image: false,
       site: {
         url: 'https://ovo73.ru/',
-        exists: true
+        exists: false
       },
       company: 'ИП Киселев М.А.',
       companyOGRN: 321732500012734,
@@ -247,7 +93,8 @@ function About () {
       position: 'Индивидуальный предприниматель',
       positionDescription: 'Founder, CEO',
       description: 'Магазин формата «у дома». Реклама, аналитика, контроль.',
-      tags: ''
+      tags: '',
+	  portfolio:[]
     },
     {
       key: 9,
@@ -266,7 +113,8 @@ function About () {
       position: 'Инженер-программист',
       positionDescription: 'Fullstack',
       description: 'Фронтенд и бэкенд, основа - Bitrix. Проект включал два сайта с общей авторизацией: ярмарку (т.е. обычный интернет-магазин готовых овощей и фруктов) и ферму (т.е. покупатель оформляет заказ, например, покупает дерево, фермер это дерево сажает, обеспечивает уход, урожай отправляется почтой). Если с первым все понятно, то со вторым очень много нюансов.',
-      tags: 'Среда'
+      tags: 'Среда',
+	  portfolio:[]
     },
     {
       key: 8,
@@ -292,7 +140,8 @@ function About () {
         <p>Установка виджета на сайтах в особо сложных случаях.</p>
         <p>Везде один и тот же бэкенд, REST JSON API.</p>
       </div>,
-      tags: 'Оплачу ЖКХ Тинькофф Тиньков'
+      tags: 'Оплачу ЖКХ Тинькофф Тиньков',
+	  portfolio:[]
     },
     {
       key: 7,
@@ -311,7 +160,8 @@ function About () {
       position: 'по договору ГПХ',
       positionDescription: 'Frontend',
       description: 'Работа над проектом ЖК.онлайн (ранее назывался Оплачу)',
-      tags: 'Оплачу ЖКХ Тинькофф Тиньков'
+      tags: 'Оплачу ЖКХ Тинькофф Тиньков',
+	  portfolio:[]
     },
     {
       key: 6,
@@ -321,7 +171,7 @@ function About () {
       image: false,
       site: {
         url: 'http://simbirit.ru',
-        exists: true
+        exists: false
       },
       company: 'ООО Симбирит',
       companyOGRN: 1077325005009,
@@ -342,7 +192,8 @@ function About () {
         </p>
         <p>Также были небольшие проекты, такие как лендинги, доработки интернет-магазинов и т.п.</p>
       </div>,
-      tags: 'Симбирские информационные технологии codemech Code Mechanics'
+      tags: 'Симбирские информационные технологии codemech Code Mechanics',
+	  portfolio:[]
     },
     {
       key: 5,
@@ -361,7 +212,8 @@ function About () {
       position: 'Индивидуальный предприниматель',
       positionDescription: 'Founder, CEO',
       description: 'Служба курьерской доставки',
-      tags: ''
+      tags: '',
+	  portfolio:[]
     },
     {
       key: 4,
@@ -380,7 +232,8 @@ function About () {
       position: 'Специалист ГОСЗ/ОИО',
       positionDescription: 'Группа Обработки Сервисных Запросов, Отдел Информационного Обслуживания',
       description: 'Специфическая работа по обслуживанию клиентов мобильной связи МТС',
-      tags: 'Мобильные ТелеСистемы Mobile telesystems'
+      tags: 'Мобильные ТелеСистемы Mobile telesystems',
+	  portfolio:[]
     },
     {
       key: 3,
@@ -399,7 +252,8 @@ function About () {
       position: 'Индивидуальный предприниматель',
       positionDescription: 'Founder, CEO',
       description: 'Интернет-магазин компьютерной техники, ПО и аксессуаров. Использовался Opencart, интеграция с Webmoney и Qiwi.',
-      tags: 'ecommerce'
+      tags: 'ecommerce',
+	  portfolio:[]
     },
     {
       key: 2,
@@ -418,7 +272,8 @@ function About () {
       position: 'Индивидуальный предприниматель',
       positionDescription: 'Founder, CEO',
       description: 'Выпуск и продажа дисков со свободным ПО для Windows.',
-      tags: 'ecommerce'
+      tags: 'ecommerce',
+	  portfolio:[]
     },
     {
       key: 1,
@@ -437,79 +292,7 @@ function About () {
       position: 'Программист',
       positionDescription: 'Delphi, Web',
       description: 'Облуживание вычислительной техники, разработка ПО, поддержка сайтов компании',
-      tags: ''
+      tags: '',
+	  portfolio:[]
     }
   ]
-  return <>
-    <Head>
-      <title key="title">Киселев Михаил Александрович (Ульяновск), образование и опыт работы</title>
-      <meta
-            key="description"
-            name="description"
-            content="Подробная информация об образовании и опыте работы"
-        />
-        <meta
-            key="og:type"
-            name="og:type"
-            content="profile"
-        />
-        <meta
-            key="og:title"
-            name="og:title"
-            content="Киселев Михаил Александрович, образование и опыт работы"
-        />
-        <meta
-            key="og:description"
-            name="og:description"
-            content="Подробная информация об образовании и опыте работы"
-        />
-        <meta
-            key="og:url"
-            name="og:url"
-            content="https://kiselev.su/about"
-        />
-        <meta
-            key="og:image"
-            name="og:image"
-            content=""
-        />
-    </Head>
-    <Card>
-      <Card.Body>
-        Киселев Михаил Александрович <br />
-        Родился 22 августа 1989 года в г. Ульяновске <br />
-        Проживаю в Ульяновске
-      </Card.Body>
-    </Card>
-    <p></p>
-    <Card>
-      <Card.Header>
-        Опыт работы
-        <FilterInput onClick={clickShowWorkFilter} onChange={changeWorkFilter} value={workFilter} show={workFilterShow} />
-      </Card.Header>
-      <ListGroup variant="flush">
-        {(work as Array<WorkItem>).filter((item: WorkItem) => {
-          return checkItem(item, workFilter)
-        }).map((item: WorkItem) => {
-          return GetWorkItem(item)
-        })}
-      </ListGroup>
-    </Card>
-    <p></p>
-    <Card>
-      <Card.Header>
-        Образование
-        <FilterInput onClick={clickShowEducationFilter} onChange={changeEducationFilter} value={educationFilter} show={educationFilterShow} />
-      </Card.Header>
-      <ListGroup variant="flush">
-        {(education as Array<EducationItem>).filter((item: EducationItem) => {
-          return checkItem(item, educationFilter)
-        }).map((item: EducationItem) => {
-          return GetEducationItem(item)
-        })}
-      </ListGroup>
-    </Card>
-  </>
-}
-
-export default About
