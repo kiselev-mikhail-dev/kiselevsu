@@ -4,6 +4,7 @@ import Head from 'next/head'
 import github from '../assets/img/github.png'
 import tenchat from '../assets/img/tenchat.png'
 import hh from '../assets/img/hh.png'
+import habr from '../assets/img/habr-career.png'
 import vk from '../assets/img/vk.svg'
 import ok from '../assets/img/ok.svg'
 
@@ -43,6 +44,7 @@ function Contact () {
         />
     </Head>
     <a className="contact-link contact-link-hh" title="HeadHunter" href="https://ulyanovsk.hh.ru/resume/f3a055e4ff064e22de0039ed1f773952703973">HH</a>
+    <a className="contact-link contact-link-habr" title="Хабр Карьера" href="https://career.habr.com/kiselevmikhail">Хабр Карьера</a>
 
     <p><Icon.Envelope /> <a href="mailto:mikhail@kiselev.su">mikhail@kiselev.su</a></p>
 	<p title="Прямой ссылки на ТГ не будет на всякий случай"><Icon.Telegram /> MikhailAKiselev</p>
@@ -63,6 +65,9 @@ function Contact () {
           opacity: 1;
         }
         &.contact-link {
+          &-habr{
+            background-image: url(${habr.src})
+          }
           &-github{
             background-image: url(${github.src})
           }
