@@ -33,7 +33,12 @@ function Topnav() {
       <Container>
         <NextLink href="/">
 			<Navbar.Brand  className={route == "/" ? "nav-link disabled" : "nav-link" } href="./" data-route="home" title={texts.MIKHAIL_KISELEVS_PERSONAL_SITE}>
-			<img src={logo.src} alt={texts.MIKHAIL_KISELEVS_PERSONAL_SITE} width="48" height="48" />
+			  <img 
+        src={logo.src} 
+        alt={texts.MIKHAIL_KISELEVS_PERSONAL_SITE} 
+        width="256" 
+        height="48"
+         />
 			</Navbar.Brand>
 		</NextLink>
         <Navbar.Toggle type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
