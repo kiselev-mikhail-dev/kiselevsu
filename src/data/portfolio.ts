@@ -31,6 +31,7 @@ import spartans2 from '../assets/img/portfolio/3spartans2.jpg'
 import spartans3 from '../assets/img/portfolio/3spartans3.jpg'
 
 import fsa from '../assets/img/portfolio/fsa.png'
+import { ProjectsItem } from '../types/simple'
 export const projects: ProjectsItem[] = [
     {
       key: 6,

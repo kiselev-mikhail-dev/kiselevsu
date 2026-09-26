@@ -1,11 +1,13 @@
 import React from 'react'
-import { projectsItem } from '../types/simple'
+import { ProjectsItem } from '../types/simple'
+import {Card, Carousel, Badge} from 'react-bootstrap'
+import SiteLink from './siteLink'
 
-type SiteLinkProps = {
-  project: projectsItem
+type PortfolioElementProps = {
+  project: ProjectsItem
 }
 
-export default function SiteLink (props: SiteLinkProps) {
+export default function PortfolioElement (props: PortfolioElementProps) {
   const item = props.project;
   return <Card>
             {(() => {

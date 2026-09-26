@@ -14,7 +14,7 @@ function Portfolio () {
   const { id } = router.query;
   const closeProject = () => router.push('/portfolio');
   const openProject = (key) => router.push({query:{id:key}});
-  const selectedProject = projects.find((item)=>item.key==id);
+  const selectedProject = projects.find((item)=>item.key.toString()==`${id}`);
   
   return <>
     <Head>

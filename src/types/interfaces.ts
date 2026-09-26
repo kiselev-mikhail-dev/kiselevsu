@@ -1,10 +1,12 @@
+import { Site } from './simple'
+
 export interface AboutItem {
   key: number,
   from: number,
-  to: number,
+  to: number | string,
   title: string,
-  image: Partial<string & boolean>,
-  site: Partial<Site & boolean>,
+  image: string | false,
+  site: Site | false,
   location: string,
   // eslint-disable-next-line
   description: any,
@@ -12,8 +14,8 @@ export interface AboutItem {
 }
 
 export interface EducationItem extends AboutItem {
-  faculty: Partial<string & boolean>,
-  department: Partial<string & boolean>,
+  faculty: string | false,
+  department: string | false,
   speciality: string,
   value: string,
 }

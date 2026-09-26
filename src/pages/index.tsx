@@ -58,11 +58,17 @@ function Home () {
         </Card.Text>
 		<Card.Text>
 		Опыт коммерческой разработки более 10 лет {" "}
-		<Button variant="link" onClick={experienceClick}>Подробнее</Button>
+		{/*<Button 
+      variant="link" 
+      onClick={experienceClick}
+      >Подробнее</Button>*/}
 		</Card.Text>
         <Card.Text>
 			Образование: два высших (Прикладная информатика и Менеждмент организации)
-			<Button variant="link" onClick={educationClick}>Подробнее</Button>
+			  {/*<Button 
+        variant="link" 
+        onClick={educationClick}
+        >Подробнее</Button>*/}
 			
 			
 		</Card.Text>

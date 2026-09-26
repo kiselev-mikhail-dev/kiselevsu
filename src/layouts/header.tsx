@@ -3,12 +3,14 @@ import { Container, Button } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons'
 import Topnav from './topnav'
 import bg from '../assets/img/banner.jpg'
+//import resume from '../assets/files/MikhailKiselev.png'
+
 function Header() {
   return <header>
 	<Container className="header-banner">
 		<Topnav />
 		<Button variant="secondary" className="resume-pdf-button">
-			<Icon.FiletypePdf />
+			{/*<a href={resume.src}><Icon.FiletypePdf /></a>*/}
 		</Button>
 		<style>{`
 		.header-banner{
