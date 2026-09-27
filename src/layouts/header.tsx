@@ -42,7 +42,7 @@ function Header() {
 			font-size:46px;
 			position:absolute;
 			top:80px;
-			right:0px;
+			right:16px;
 		}
 		`}</style>
 	</Container>

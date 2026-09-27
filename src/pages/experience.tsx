@@ -21,7 +21,7 @@ function GetWorkItem (item: WorkItem) {
   const ogrn = item.companyOGRN.toString()
   return <ListGroup.Item key={item.key}>
     <Row>
-      <Col md={3} xl={2}>
+      <Col md={4} lg={3}>
         <Card.Title>
           {item.title}
 			  {item.companyDescription?.length>0 && 
@@ -43,7 +43,7 @@ function GetWorkItem (item: WorkItem) {
         <br />
         {item.from.toString()}{item.from !== item.to ? ' - ' + item.to.toString() : ''}
       </Col>
-      <Col md={9} xl={10}>
+      <Col md={8} lg={9}>
         <p><b>Позиция:</b> {item.position} {item.positionDescription.length ? <span className="text-muted">({item.positionDescription})</span> : ''}</p>
         {item.description}
       </Col>

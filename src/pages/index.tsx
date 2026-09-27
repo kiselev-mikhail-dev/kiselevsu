@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { Card, Button, Modal } from 'react-bootstrap'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Image from 'react-bootstrap/Image'
-import photo from '../assets/img/photo.jpg'
 
 function Home () {
   const router = useRouter()
@@ -18,11 +16,11 @@ function Home () {
   }
   return <>
     <Head>
-      <title key="title">Персональный сайт Михаила Киселева</title>
+      <title key="title">Михаил Александрович Киселев, frontend-разработчик</title>
       <meta
             key="description"
             name="description"
-            content="Персональный сайт фронтенд-разработчика"
+            content="Персональный сайт фронтенд-разработчика Михаила Киселева"
         />
         <meta
             key="og:type"
@@ -32,7 +30,7 @@ function Home () {
         <meta
             key="og:title"
             name="og:title"
-            content="Персональный сайт Михаила Киселева"
+            content="Михаил Александрович Киселев, frontend-разработчик"
         />
         <meta
             key="og:description"
@@ -53,24 +51,22 @@ function Home () {
     <Card>
       <Card.Body>
         <Card.Text>
-			Киселев Михаил Александрович, frontend-разработчик <br />
-			Родился 22 августа 1989 года
+			<strong>Киселев Михаил Александрович</strong>, frontend-разработчик.
+        </Card.Text>
+        <Card.Text>
+          Родился 22 августа 1989 года. Гражданин России.
         </Card.Text>
 		<Card.Text>
-		Опыт коммерческой разработки более 10 лет {" "}
-		{/*<Button 
-      variant="link" 
-      onClick={experienceClick}
-      >Подробнее</Button>*/}
+		  Опыт коммерческой разработки более 10 лет.{" "}
+		  <a href="/experience"
+        onClick={experienceClick}
+      >Подробнее</a>
 		</Card.Text>
-        <Card.Text>
-			Образование: два высших (Прикладная информатика и Менеждмент организации)
-			  {/*<Button 
-        variant="link" 
-        onClick={educationClick}
-        >Подробнее</Button>*/}
-			
-			
+    <Card.Text>
+			Образование: два высших (Прикладная информатика и Менеждмент организации){" "}
+			  <a href="/education"
+          onClick={educationClick}
+        >Подробнее</a>
 		</Card.Text>
 		<Card.Text>
 			Проживаю, в основном, в г.Ульяновске (Россия).<br />

@@ -34,6 +34,7 @@ function Topnav() {
         <NextLink href="/">
 			<Navbar.Brand  className={route == "/" ? "nav-link disabled" : "nav-link" } href="./" data-route="home" title={texts.MIKHAIL_KISELEVS_PERSONAL_SITE}>
 			  <img 
+        style={{width:"125px",height:"auto"}}
         src={logo.src} 
         alt={texts.MIKHAIL_KISELEVS_PERSONAL_SITE} 
         width="256" 
