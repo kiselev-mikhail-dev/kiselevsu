@@ -10,7 +10,7 @@ function Header() {
 	<Container className="header-banner">
 		<Topnav />
 		<a
-			className="btn btn-secondary resume-pdf-button"
+			className="resume-pdf-button"
 			href={resume}
 			download="MikhailKiselev.pdf"
 			title="Скачать резюме (PDF)"
@@ -26,20 +26,23 @@ function Header() {
 		      только на host-элементы, а .header-banner висит на Container
 		      из react-bootstrap. */}
 		<style jsx global>{`
+		body{
+			background:#efeee9
+		}
 		.header-banner{
 			background-image: url('${bg.src}');
 			background-size:auto 210%;
-			background-color:#ffffff;
 			background-position: center right;
 			background-repeat: no-repeat;
 			height: 200px;
 			margin-bottom:16px;
 			position:relative;
 		}
-		.btn.resume-pdf-button {
+		.resume-pdf-button {
+			font-size:46px;
 			position:absolute;
-			top:100px;
-			right:16px;
+			top:80px;
+			right:0px;
 		}
 		`}</style>
 	</Container>

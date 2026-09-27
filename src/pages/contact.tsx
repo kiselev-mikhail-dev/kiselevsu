@@ -7,6 +7,7 @@ import hh from '../assets/img/hh.png'
 import habr from '../assets/img/habr-career.png'
 import vk from '../assets/img/vk.svg'
 import ok from '../assets/img/ok.svg'
+import { Card } from 'react-bootstrap'
 
 function Contact () {
   return <div>
@@ -43,11 +44,14 @@ function Contact () {
             content=""
         />
     </Head>
-    <a className="contact-link contact-link-hh" title="HeadHunter" href="https://ulyanovsk.hh.ru/resume/f3a055e4ff064e22de0039ed1f773952703973">HH</a>
+    <Card>
+      <Card.Body>
+            <a className="contact-link contact-link-hh" title="HeadHunter" href="https://ulyanovsk.hh.ru/resume/f3a055e4ff064e22de0039ed1f773952703973">HH</a>
     <a className="contact-link contact-link-habr" title="Хабр Карьера" href="https://career.habr.com/kiselevmikhail">Хабр Карьера</a>
-
-    <p><Icon.Envelope /> <a href="mailto:mikhail@kiselev.su">mikhail@kiselev.su</a></p>
-	<p title="Прямой ссылки на ТГ не будет на всякий случай"><Icon.Telegram /> MikhailAKiselev</p>
+        <Card.Text><Icon.Envelope /> <a href="mailto:mikhail@kiselev.su">mikhail@kiselev.su</a></Card.Text>
+        <Card.Text title='Прямой ссылки на ТГ не будет на всякий случай'><Icon.Telegram /> MikhailAKiselev</Card.Text>
+      </Card.Body>
+    </Card>
     <style jsx>{`
       .contact-link {
         font-size: 0px;
